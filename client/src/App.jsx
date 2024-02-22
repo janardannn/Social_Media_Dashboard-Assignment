@@ -1,42 +1,125 @@
+import { useEffect, useState } from "react"
+import axios from "axios"
+
 import AddPost from "./Components/AddPost"
-// import Card from "./Components/Cards"
+import StatsChart from "./Components/Chart"
+import Card from "./Components/Card"
+
 
 function App() {
 
-  return (
-    <>
+  const [postsData, setPostsData] = useState([]);
 
-      <div>
+  const [totalLikes, setTotalLikes] = useState(0)
+  const [totalComments, setTotalComments] = useState(0)
+  const [totalShares, setTotalShares] = useState(0)
 
-        <div className="lg:mt-12"></div>
-        <div className="header lg:w-[1200px] lg:m-auto m-2">
-          <h1 className="text-3xl">Dashboard</h1>
-        </div>
-        <div className="lg:mb-12"></div>
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get("http://127.0.0.1:8000/api/posts/")
 
-        <div className="body lg:flex lg:justify-center">
-          <div className="total-likes-comments-shares flex flex-col">
-            <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">Likes</div>
-            <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">Comments</div>
-            <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">Shares</div>
+      if (data) {
+        console.log(data.data)
+        setPostsData(data.data)
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    if (postsData.length > 0) {
+      let likes = 0
+      let comments = 0
+      let shares = 0
+
+      postsData.forEach((post) => {
+        likes += post.likes
+        comments += post.comments
+        shares += post.shares
+      })
+
+      setTotalLikes(likes)
+      setTotalComments(comments)
+      setTotalShares(shares)
+    }
+  }, [postsData])
+
+
+  if (postsData.length === 0) {
+    return (
+      <div className="w-screen h-screen flex justify-center items-center">
+        <p className="m-auto">Loading...</p>
+      </div>
+    )
+  }
+
+  else {
+    return (
+      <>
+
+        <div>
+
+          <div className="lg:mt-12"></div>
+          <div className="header lg:w-[1250px] lg:m-auto m-2">
+            <h1 className="text-3xl">Dashboard</h1>
           </div>
-          <div className="chart lg:text-xl">
-            <div className="w-[600px] h-[468px] border-2 rounded-md m-2 p-2">
-              Chart
+          <div className="lg:mb-12"></div>
+
+          <div className="body lg:flex lg:justify-center">
+            <div className="total-likes-comments-shares flex flex-col">
+
+              <Card title="Likes" total={totalLikes} />
+              <Card title="Comments" total={totalComments} />
+              <Card title="Shares" total={totalShares} />
+
+              {/* <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
+                Likes
+                <div className="mt-8 text-4xl text-blue-600">
+                  {totalLikes}
+                </div>
+              </div>
+
+              <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
+                Comments
+                <div className="mt-8 text-4xl text-yellow-600">
+                  {totalComments}
+                </div>
+              </div>
+
+              <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
+                Shares
+                <div className="mt-8 text-4xl text-green-700">
+                  {totalShares}
+                </div>
+              </div> */}
+
             </div>
-          </div>
-          <div className="post-schedule">
-            <div className="w-[430px] h-fit border-2 rounded-md m-2 p-2">
-              <p className="lg:text-xl mb-2">Schedule posts for later</p>
-              <div>
-                <AddPost />
+
+            <div className="chart lg:text-xl">
+              <div className="w-[600px] h-[468px] border-2 rounded-md m-2 p-2">
+                Chart
+
+                <div>
+                  <StatsChart title="Likes" chartData={postsData} />
+                </div>
+
               </div>
             </div>
+
+            <div className="post-schedule">
+              <div className="w-[430px] h-fit border-2 rounded-md m-2 p-2">
+                <p className="lg:text-xl mb-2">Schedule posts for later</p>
+                <div>
+                  <AddPost />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default App
