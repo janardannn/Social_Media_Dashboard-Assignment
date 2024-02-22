@@ -65,46 +65,22 @@ function App() {
           <div className="header lg:w-[1250px] lg:m-auto m-2">
             <h1 className="text-3xl">Dashboard</h1>
           </div>
-          <div className="lg:mb-12"></div>
+          <div className="lg:mb-6"></div>
 
           <div className="body lg:flex lg:justify-center">
-            <div className="total-likes-comments-shares flex flex-col">
 
+            <div className="total-likes-comments-shares flex flex-col">
               <Card title="Likes" total={totalLikes} />
               <Card title="Comments" total={totalComments} />
               <Card title="Shares" total={totalShares} />
-
-              {/* <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
-                Likes
-                <div className="mt-8 text-4xl text-blue-600">
-                  {totalLikes}
-                </div>
-              </div>
-
-              <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
-                Comments
-                <div className="mt-8 text-4xl text-yellow-600">
-                  {totalComments}
-                </div>
-              </div>
-
-              <div className="w-[200px] h-[145px] border-2 rounded-md m-2 p-2 lg:text-xl">
-                Shares
-                <div className="mt-8 text-4xl text-green-700">
-                  {totalShares}
-                </div>
-              </div> */}
-
             </div>
 
-
             <StatsChart title="Likes" chartData={postsData} />
-
             <ScheduledPosts />
 
-
           </div>
-          <Posts />
+
+          <Posts postsData={postsData} />
 
         </div>
       </>
