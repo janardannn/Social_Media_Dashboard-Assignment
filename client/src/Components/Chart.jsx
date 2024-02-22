@@ -91,15 +91,23 @@ export default function StatsChart({ title, chartData }) {
 
     return (
         <>
-            <div className="selector">
-                <select onChange={handleSelectorChange} defaultValue={current} className="text-sm rounded-md p-1 my-4 ">
-                    {selectOptions.map((option, index) => {
-                        return <option key={index} value={option.value}>{option.label}</option>
-                    })}
-                </select>
-            </div>
+            <div className="chart lg:text-xl">
+                <div className="lg:w-[600px] w-[400px] lg:h-[468px] h-[350px] border-2 rounded-md m-2 p-2">
+                    Chart
+                    <div>
+                        <div className="selector">
+                            <select onChange={handleSelectorChange} defaultValue={current} className="text-sm rounded-md p-1 my-4 ">
+                                {selectOptions.map((option, index) => {
+                                    return <option key={index} value={option.value}>{option.label}</option>
+                                })}
+                            </select>
+                        </div>
 
-            <Line data={current === "all" ? multiData : data} />
+                        <Line data={current === "all" ? multiData : data} />
+                    </div>
+
+                </div>
+            </div>
         </>
     )
 }

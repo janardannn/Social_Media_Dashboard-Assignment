@@ -4,7 +4,9 @@ import axios from "axios"
 import AddPost from "./Components/AddPost"
 import StatsChart from "./Components/Chart"
 import Card from "./Components/Card"
-
+import ScheduledPost from "./Components/SPost"
+import ScheduledPosts from "./Components/SchedulePosts"
+import Posts from "./Components/Posts"
 
 function App() {
 
@@ -95,27 +97,15 @@ function App() {
 
             </div>
 
-            <div className="chart lg:text-xl">
-              <div className="w-[600px] h-[468px] border-2 rounded-md m-2 p-2">
-                Chart
 
-                <div>
-                  <StatsChart title="Likes" chartData={postsData} />
-                </div>
+            <StatsChart title="Likes" chartData={postsData} />
 
-              </div>
-            </div>
+            <ScheduledPosts />
 
-            <div className="post-schedule">
-              <div className="w-[430px] h-fit border-2 rounded-md m-2 p-2">
-                <p className="lg:text-xl mb-2">Schedule posts for later</p>
-                <div>
-                  <AddPost />
-                </div>
-              </div>
-            </div>
 
           </div>
+          <Posts />
+
         </div>
       </>
     )
