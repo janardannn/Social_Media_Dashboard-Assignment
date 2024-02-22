@@ -58,30 +58,31 @@ function App() {
   else {
     return (
       <>
+        <div className="main-container w-full h-full flex justify-center items-center">
+          <div className="flex flex-col justify-center items-start">
 
-        <div>
+            <div className="lg:mt-12"></div>
+            <div className="header m-2">
+              <h1 className="text-3xl">Dashboard</h1>
+            </div>
+            <div className="lg:mb-6"></div>
 
-          <div className="lg:mt-12"></div>
-          <div className="header lg:w-[1250px] lg:m-auto m-2">
-            <h1 className="text-3xl">Dashboard</h1>
-          </div>
-          <div className="lg:mb-6"></div>
+            <div className="body lg:flex">
 
-          <div className="body lg:flex lg:justify-center">
+              <div className="total-likes-comments-shares flex flex-col">
+                <Card title="Likes" total={totalLikes} />
+                <Card title="Comments" total={totalComments} />
+                <Card title="Shares" total={totalShares} />
+              </div>
 
-            <div className="total-likes-comments-shares flex flex-col">
-              <Card title="Likes" total={totalLikes} />
-              <Card title="Comments" total={totalComments} />
-              <Card title="Shares" total={totalShares} />
+              <StatsChart title="Likes" chartData={postsData} />
+              <ScheduledPosts />
+
             </div>
 
-            <StatsChart title="Likes" chartData={postsData} />
-            <ScheduledPosts />
+            <Posts postsData={postsData} />
 
           </div>
-
-          <Posts postsData={postsData} />
-
         </div>
       </>
     )
