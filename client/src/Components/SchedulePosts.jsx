@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
+import { API_BASE_URL } from "../App"
 import AddPost from "./AddPost"
 import ScheduledPost from "./SPost"
 import NewPostBox from "./NewPostBox"
@@ -15,7 +16,7 @@ export default function ScheduledPosts() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios.get("http://127.0.0.1:8000/api/scheduledposts/")
+            const data = await axios.get(API_BASE_URL + "/api/scheduledposts/")
 
             if (data) {
                 // console.log(data.data)
@@ -33,7 +34,7 @@ export default function ScheduledPosts() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios.get("http://127.0.0.1:8000/api/scheduledposts/")
+            const data = await axios.get(API_BASE_URL + "/api/scheduledposts/")
 
             if (data) {
                 // console.log(data.data)

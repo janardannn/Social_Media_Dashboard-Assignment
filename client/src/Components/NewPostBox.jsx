@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { API_BASE_URL } from '../App'
 export default function NewPostBox({ id, newPost, setNewPost, handleEdit, deletePost, setPostCount, setSaveStatus }) {
 
     const handleTitleChange = (e) => {
@@ -11,13 +11,13 @@ export default function NewPostBox({ id, newPost, setNewPost, handleEdit, delete
 
     const handleAdd = async (e) => {
         if (deletePost) {
-            await axios.put("http://127.0.0.1:8000/api/scheduledposts/" + id + "/", { title: newPost.title, description: newPost.description })
+            await axios.put(API_BASE_URL + "/api/scheduledposts/" + id + "/", { title: newPost.title, description: newPost.description })
             setSaveStatus(prev => prev + 1)
             handleEdit(false)
         }
         else {
             try {
-                await axios.post("http://127.0.0.1:8000/add_scheduled_post", { title: newPost.title, description: newPost.description })
+                await axios.post(API_BASE_URL + "/add_scheduled_post", { title: newPost.title, description: newPost.description })
                 setSaveStatus(prev => prev + 1)
             }
             catch (err) {
@@ -31,7 +31,7 @@ export default function NewPostBox({ id, newPost, setNewPost, handleEdit, delete
     const handleCancel = async (e) => {
         // console.log("here")
         if (deletePost) {
-            await axios.delete("http://127.0.0.1:8000/api/scheduledposts/" + id + "/")
+            await axios.delete(API_BASE_URL + "/api/scheduledposts/" + id + "/")
             setPostCount((prev) => prev - 1)
         }
         else {

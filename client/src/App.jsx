@@ -8,6 +8,9 @@ import ScheduledPost from "./Components/SPost"
 import ScheduledPosts from "./Components/SchedulePosts"
 import Posts from "./Components/Posts"
 
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+console.log(API_BASE_URL)
+
 function App() {
 
   const [postsData, setPostsData] = useState([]);
@@ -18,7 +21,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await axios.get("http://127.0.0.1:8000/api/posts/")
+      const data = await axios.get(API_BASE_URL + "/api/posts/")
 
       if (data) {
         // console.log(data.data)
