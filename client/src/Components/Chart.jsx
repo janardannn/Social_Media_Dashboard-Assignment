@@ -50,7 +50,7 @@ export default function StatsChart({ title, chartData }) {
     }, [current])
 
     const data = {
-        labels: chartData.map(data => data.title),
+        labels: chartData.map(data => data.id),
         datasets: [{
             label: selectedOption.title,
             data: chartData.map(data => data[selectedOption.title]),
@@ -61,7 +61,7 @@ export default function StatsChart({ title, chartData }) {
     }
 
     const multiData = {
-        labels: chartData.map(data => data.title),
+        labels: chartData.map(data => data.id),
         datasets: [
             {
                 label: "likes",
