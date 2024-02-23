@@ -22,8 +22,10 @@ from SocialDashboardAPI import views
 
 router = routers.DefaultRouter()
 router.register(r'posts', views.PostView, 'Post')
+router.register(r'scheduledposts', views.ScheduledPostView, 'ScheduledPost')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path("add_scheduled_post", views.add_scheduled_post)
 ]

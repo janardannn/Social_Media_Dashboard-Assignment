@@ -21,7 +21,7 @@ function App() {
       const data = await axios.get("http://127.0.0.1:8000/api/posts/")
 
       if (data) {
-        console.log(data.data)
+        // console.log(data.data)
         setPostsData(data.data)
       }
     }
@@ -67,20 +67,25 @@ function App() {
             </div>
             <div className="lg:mb-6"></div>
 
-            <div className="body lg:flex">
+            <div className="flex">
+              <div>
+                <div className="body lg:flex">
 
-              <div className="total-likes-comments-shares flex flex-col">
-                <Card title="Likes" total={totalLikes} />
-                <Card title="Comments" total={totalComments} />
-                <Card title="Shares" total={totalShares} />
+                  <div className="total-likes-comments-shares flex flex-col">
+                    <Card title="Likes" total={totalLikes} />
+                    <Card title="Comments" total={totalComments} />
+                    <Card title="Shares" total={totalShares} />
+                  </div>
+
+                  <StatsChart title="Likes" chartData={postsData} />
+
+
+                </div>
+                <Posts postsData={postsData} />
               </div>
 
-              <StatsChart title="Likes" chartData={postsData} />
               <ScheduledPosts />
-
             </div>
-
-            <Posts postsData={postsData} />
 
           </div>
         </div>
