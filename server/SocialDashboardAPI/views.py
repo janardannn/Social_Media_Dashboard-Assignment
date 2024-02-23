@@ -31,3 +31,7 @@ def add_scheduled_post(request):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
     else:
         return JsonResponse({'message': 'Invalid request method!'}, status=400)
+
+@csrf_exempt
+def home(request):
+    return JsonResponse({'message': 'API up and running!'}, status=200)

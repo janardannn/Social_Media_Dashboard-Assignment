@@ -27,5 +27,6 @@ router.register(r'scheduledposts', views.ScheduledPostView, 'ScheduledPost')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path("add_scheduled_post", views.add_scheduled_post)
+    path("add_scheduled_post", views.add_scheduled_post),
+    path("", views.home),
 ]
